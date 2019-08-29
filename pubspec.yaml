@@ -1,0 +1,31 @@
+name: shopper
+description: A shopping app sample that uses Provider for state management.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.3.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Import the provider package.
+  provider: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  test: ^1.5.1
+  sqflite: ^1.1.0
+  path_provider: ^0.5.0+1
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: YaHei
+      fonts:
+        - asset: fonts/YaHei/Microsoft-YaHei.ttf
+          weight: 700
