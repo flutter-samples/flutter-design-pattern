@@ -25,8 +25,12 @@ The project is maintained by a non-profit organisation, along with an amazing co
 
 # Screen Shots
 
-<img src="https://raw.githubusercontent.com/flutter-samples/flutter-design-pattern/master/github-assets/Screenshot_1567050012.png" alt="Screen Shots" />
-<img src="https://raw.githubusercontent.com/flutter-samples/flutter-design-pattern/master/github-assets/Screenshot_1567050036.png" alt="Screen Shots" />
+<table>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/flutter-samples/flutter-design-pattern/master/github-assets/Screenshot_1567050012.png" alt="Screen Shots" /></td>
+    <td><img src="https://raw.githubusercontent.com/flutter-samples/flutter-design-pattern/master/github-assets/Screenshot_1567050036.png" alt="Screen Shots" /></td>
+  </tr>
+</table>
 
 
 ---
