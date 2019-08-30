@@ -23,12 +23,21 @@ class CartController with ChangeNotifier {
   }
 
   remove(Catalog catalog) {
-    _itemIds.remove(catalog);
+    _itemIds.removeWhere((item) => item.id == catalog.id);
     notifyListeners();
   }
 
   clear() {
     _itemIds.clear();
     notifyListeners();
+  }
+
+  contains(id) {
+    return _itemIds
+        .map((item) {
+          return item.id;
+        })
+        .toList()
+        .contains(id);
   }
 }

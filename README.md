@@ -13,12 +13,34 @@ The project is maintained by a non-profit organisation, along with an amazing co
 - Show a logic for fetch data from different datasources as above graph.
 
 ## Memory fetch data
+
+Change `repositories/catalog.dart`
+
+```
+const dataSource = 'memory';
+```
+
 `repositories/catalog.dart` A route distribution for fetching data
 `memory/catalog.dart` All CURD operations will be here
 `file/catalog.dart` Define data
 
+## Sqlite fetch data
+
+Change `repositories/catalog.dart`
+
+```
+const dataSource = 'db';
+```
+
+#### Notice
+
+You can't use  `cart.items.contains(item)` to compare catalog whether exists in cart,because use database reload data.Add `contains` method in cart controller,and use below
+
+```
+cart.contains(item.id)
+```
+
 ## Todo
-- Sqlite implement
 - Http implement
 
 ---

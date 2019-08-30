@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shopper/controllers/cart.dart';
 import 'package:shopper/controllers/catalog.dart';
 import 'package:shopper/models/catalog.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ShopCatalog extends StatelessWidget {
   @override
@@ -51,17 +52,17 @@ class _CartButton extends StatelessWidget {
     return Container(
       color: Colors.transparent,
       child: IconButton(
-        icon: cart.items.contains(item)
+        icon: cart.contains(item.id)
             ? Icon(
                 Icons.remove_shopping_cart,
               )
             : Icon(
                 Icons.add_shopping_cart,
               ),
-        color: cart.items.contains(item) ? Colors.grey : Colors.black,
+        color: cart.contains(item.id) ? Colors.grey : Colors.black,
         splashColor: Theme.of(context).primaryColor,
         onPressed: () {
-          cart.items.contains(item) ? cart.remove(item) : cart.add(item);
+          cart.contains(item.id) ? cart.remove(item) : cart.add(item);
         },
       ),
     );
@@ -88,8 +89,8 @@ class _CartItem extends StatelessWidget {
             fontFamily: 'YaHei',
             fontWeight: FontWeight.w700,
             fontSize: 20,
-            color: cart.items.contains(item) ? Colors.grey : Colors.black,
-            decoration: cart.items.contains(item)
+            color: cart.contains(item.id) ? Colors.grey : Colors.black,
+            decoration: cart.contains(item.id)
                 ? TextDecoration.lineThrough
                 : TextDecoration.none,
           ),
@@ -205,14 +206,21 @@ class _CatalogList extends StatelessWidget {
             AspectRatio(
               aspectRatio: 1,
               child: Container(
-                color: item.color,
-                child: Center(
-                  child: Text(
-                    item.price.toString(),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
+                color: Colors.transparent,
+                padding: EdgeInsets.all(5.0),
+                child: SvgPicture.asset("assets/${item.name}.svg",
+                    color: Color(item.color), semanticsLabel: '${item.name}'),
+              ),
+            ),
+            Container(
+              width: 40,
+              color: Colors.transparent,
+              child: Center(
+                child: Text(
+                  item.price.toString(),
+                  style: TextStyle(
+                    color: Color(item.color),
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

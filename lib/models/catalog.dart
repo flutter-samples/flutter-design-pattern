@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class Catalog {
   final int id;
   final String name;
-  final Color color;
+  final int color;
   final int price;
 
   Catalog(this.id, this.name, this.color, this.price);

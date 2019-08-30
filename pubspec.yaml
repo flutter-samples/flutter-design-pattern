@@ -20,6 +20,7 @@ dev_dependencies:
   test: ^1.5.1
   sqflite: ^1.1.0
   path_provider: ^0.5.0+1
+  flutter_svg: ^0.14.0
 
 flutter:
   uses-material-design: true
@@ -29,3 +30,7 @@ flutter:
       fonts:
         - asset: fonts/YaHei/Microsoft-YaHei.ttf
           weight: 700
+
+  assets:
+    #https://www.svgrepo.com/svg/50532/shoes
+    - assets/
