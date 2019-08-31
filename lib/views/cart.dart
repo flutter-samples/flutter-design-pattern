@@ -36,27 +36,34 @@ class _CartList extends StatelessWidget {
     return ListView.builder(
       itemCount: cart.items.length,
       itemBuilder: (context, index) => ListTile(
-          leading: Icon(
-            Icons.chevron_right,
+        leading: ClipOval(
+          child: Container(
+            padding: EdgeInsets.all(0.0),
+            color: Colors.white,
+            child: Icon(
+              Icons.fiber_manual_record,
+              color: Color(cart.items[index].color),
+            ),
+          ),
+        ),
+        title: Text(
+          cart.items[index].name,
+          style: TextStyle(
+            fontFamily: 'YaHei',
+            color: Colors.white,
+            fontSize: 18,
+          ),
+        ),
+        trailing: IconButton(
+          icon: Icon(
+            Icons.delete_outline,
             color: Colors.white,
           ),
-          title: Text(
-            cart.items[index].name,
-            style: TextStyle(
-              fontFamily: 'YaHei',
-              color: Colors.white,
-              fontSize: 18,
-            ),
-          ),
-          trailing: IconButton(
-            icon: Icon(
-              Icons.delete_outline,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              cart.remove(cart.items[index]);
-            },
-          )),
+          onPressed: () {
+            cart.remove(cart.items[index]);
+          },
+        ),
+      ),
     );
   }
 }

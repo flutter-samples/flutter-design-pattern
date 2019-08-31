@@ -206,10 +206,18 @@ class _CatalogList extends StatelessWidget {
             AspectRatio(
               aspectRatio: 1,
               child: Container(
-                color: Colors.transparent,
+                decoration: BoxDecoration(
+                  color: Color(item.color),
+                  border: Border.all(
+                    color: Color(item.color),
+                  ),
+                  borderRadius: BorderRadius.all(
+                    const Radius.circular(5.0),
+                  ),
+                ),
                 padding: EdgeInsets.all(5.0),
                 child: SvgPicture.asset("assets/${item.name}.svg",
-                    color: Color(item.color), semanticsLabel: '${item.name}'),
+                    color: Colors.white, semanticsLabel: '${item.name}'),
               ),
             ),
             Container(
@@ -219,8 +227,10 @@ class _CatalogList extends StatelessWidget {
                 child: Text(
                   item.price.toString(),
                   style: TextStyle(
+                    fontFamily: 'YaHei',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12,
                     color: Color(item.color),
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
