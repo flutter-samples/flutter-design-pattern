@@ -9,7 +9,15 @@ class CatalogController {
   Stream<List<Catalog>> get catalogs => _catalogController.stream;
 
   CatalogController() {
-    getCatalogs();
+    init();
+  }
+
+  init() async {
+    // initial sample data here.
+    await addCatalog();
+    await addCatalog();
+    // end
+    return getCatalogs();
   }
 
   Future getCatalogs() async {

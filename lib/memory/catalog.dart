@@ -8,10 +8,6 @@ class CatalogMemory {
   }
   Future initCatalogs() async {
     catalogList.clear();
-    Catalog cat1 = Catalog.fromJson(json1);
-    Catalog cat2 = Catalog.fromJson(json2);
-    catalogList.add(cat1);
-    catalogList.add(cat2);
   }
 
   Future<List> getCatalogs() async {
