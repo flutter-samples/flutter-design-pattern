@@ -4,27 +4,20 @@ import 'package:shopper/controllers/cart.dart';
 import 'package:shopper/controllers/catalog.dart';
 import 'package:shopper/models/catalog.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:badges/badges.dart';
 
 class ShopCatalog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var catalogs = Provider.of<CatalogController>(context).catalogs;
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          _AppBar(),
-          StreamBuilder(
-            stream: catalogs,
-            builder: (context, snapshot) => SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  return _CatalogList(snapshot.data[index]);
-                },
-                childCount: snapshot.hasData ? snapshot.data.length : 0,
-              ),
-            ),
+      appBar: _AppBar(),
+      body: Consumer<CatalogController>(
+        builder: (context, catalog, _) => ListView.builder(
+          itemCount: catalog.catalogs.length,
+          itemBuilder: (context, index) => _CatalogList(
+            catalog.catalogs[index],
           ),
-        ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
@@ -43,9 +36,7 @@ class ShopCatalog extends StatelessWidget {
 
 class _CartButton extends StatelessWidget {
   final Catalog item;
-
   const _CartButton({Key key, @required this.item}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     var cart = Provider.of<CartController>(context);
@@ -71,9 +62,7 @@ class _CartButton extends StatelessWidget {
 
 class _CartItem extends StatelessWidget {
   final Catalog item;
-
   const _CartItem({Key key, @required this.item}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     var cart = Provider.of<CartController>(context);
@@ -100,23 +89,41 @@ class _CartItem extends StatelessWidget {
   }
 }
 
-class _AppBar extends StatelessWidget {
+class _AppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
-    var catalogBloc = Provider.of<CatalogController>(context);
-    return SliverAppBar(
+    var catalogController = Provider.of<CatalogController>(context);
+    return AppBar(
       title: Text('Catalog'),
-      floating: true,
       actions: [
-        IconButton(
-          icon: Icon(Icons.restore),
-          onPressed: () {
-            catalogBloc.clearCatalogs();
-          },
+        Consumer<CatalogController>(
+          builder: (context, catalog, child) => IconButton(
+            icon: Badge(
+              badgeColor: Colors.orange,
+              toAnimate: false,
+              badgeContent: Text(
+                '${catalog.catalogs.length}',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                ),
+              ),
+              child: Icon(
+                Icons.delete_forever,
+                color: Colors.white,
+              ),
+            ),
+            onPressed: () {
+              catalogController.clearCatalogs();
+            },
+          ),
         ),
       ],
     );
   }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
 }
 
 class _BottomBar extends StatelessWidget {
@@ -131,33 +138,37 @@ class _BottomBar extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
-              width: 100,
-              height: 60,
-              color: Colors.orange,
-              child: IconButton(
-                color: Colors.red,
-                iconSize: 30.0,
-                padding: EdgeInsets.only(left: 0.0),
-                icon: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                ),
-                onPressed: () => Navigator.pushNamed(context, '/cart'),
-              ),
-            ),
             Consumer<CartController>(
-              builder: (context, cart, child) => _buildLabel(
-                Icons.attach_file,
-                '${cart.items.length}',
-                EdgeInsets.all(10.0),
+              builder: (context, cart, child) => Container(
+                width: 100,
+                height: 60,
+                color: Colors.orange,
+                child: IconButton(
+                  color: Colors.red,
+                  iconSize: 30.0,
+                  padding: EdgeInsets.only(left: 0.0),
+                  icon: Badge(
+                    badgeContent: Text(
+                      '${cart.items.length}',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.shopping_cart,
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () => Navigator.pushNamed(context, '/cart'),
+                ),
               ),
             ),
             Consumer<CartController>(
               builder: (context, cart, child) => _buildLabel(
                 Icons.attach_money,
                 '${cart.totalPrice}',
-                EdgeInsets.only(right: 100.0, top: 10.0, bottom: 10.0),
+                EdgeInsets.only(right: 150.0, top: 10.0, bottom: 10.0),
               ),
             ),
           ],
@@ -170,19 +181,21 @@ class _BottomBar extends StatelessWidget {
     return Container(
       color: Colors.transparent,
       padding: padding,
-      child: Column(
+      child: Row(
         children: <Widget>[
           Icon(
             icon,
-            size: 12,
+            size: 28,
             color: Colors.white,
           ),
           Consumer<CartController>(
             builder: (context, cart, child) => Text(
               '$text',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 28,
                 color: Colors.white,
+                fontFamily: 'YaHei',
+                fontWeight: FontWeight.w800,
               ),
             ),
           ),

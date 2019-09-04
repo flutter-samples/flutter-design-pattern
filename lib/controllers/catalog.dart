@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:shopper/repositories/catalog.dart';
 import 'package:shopper/models/catalog.dart';
 import 'dart:async';
 
-class CatalogController {
+class CatalogController with ChangeNotifier {
   final _catalogRepository = CatalogRepository();
-  final _catalogController = StreamController<List<Catalog>>.broadcast();
-
-  Stream<List<Catalog>> get catalogs => _catalogController.stream;
+  List<Catalog> _items = [];
+  List<Catalog> get catalogs => _items;
 
   CatalogController() {
     init();
@@ -17,26 +17,22 @@ class CatalogController {
     await addCatalog();
     await addCatalog();
     // end
-    return getCatalogs();
+    await getCatalogs();
   }
 
   Future getCatalogs() async {
-    _catalogController.sink.add(
-      await _catalogRepository.getCatalogs(),
-    );
+    _items = await _catalogRepository.getCatalogs();
+    notifyListeners();
   }
 
   Future addCatalog() async {
     await _catalogRepository.addCatalog();
     await getCatalogs();
+    notifyListeners();
   }
 
   Future clearCatalogs() async {
     await _catalogRepository.clearCatalogs();
     await getCatalogs();
-  }
-
-  void dispose() {
-    _catalogController.close();
   }
 }

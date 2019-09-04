@@ -51,6 +51,7 @@ cart.contains(item.id)
   <tr>
     <td><img src="https://raw.githubusercontent.com/flutter-samples/flutter-design-pattern/master/github-assets/Screenshot_1567050012.png" alt="Screen Shots" /></td>
     <td><img src="https://raw.githubusercontent.com/flutter-samples/flutter-design-pattern/master/github-assets/Screenshot_1567050036.png" alt="Screen Shots" /></td>
+    <td><img src="https://raw.githubusercontent.com/flutter-samples/flutter-design-pattern/master/github-assets/Screenshot_1567583879.png" alt="Screen Shots" /></td>
   </tr>
 </table>
 
@@ -58,6 +59,10 @@ cart.contains(item.id)
 ---
 
 Welcome Contribute With Pull Request.
+
+---
+
+[For Chinese,you can read this wechat official article](https://mp.weixin.qq.com/s/nyCp9KaWpMqyzVnbv_07Iw)
 
 ---
 

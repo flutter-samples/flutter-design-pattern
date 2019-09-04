@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:badges/badges.dart';
 import 'package:shopper/controllers/cart.dart';
+import 'package:shopper/views/order.dart';
 
 class ShopCart extends StatelessWidget {
   @override
@@ -87,9 +89,10 @@ class _CartTotal extends StatelessWidget {
             SizedBox(width: 24),
             FlatButton(
               onPressed: () {
-                Scaffold.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Buying not supported yet.'),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ShopOrder(),
                   ),
                 );
               },
@@ -106,16 +109,32 @@ class _CartTotal extends StatelessWidget {
 class _AppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
-    var cartBloc = Provider.of<CartController>(context);
+    var cartController = Provider.of<CartController>(context);
     return AppBar(
       title: Text('Cart'),
       backgroundColor: Colors.teal,
       actions: [
-        IconButton(
-          icon: Icon(Icons.restore),
-          onPressed: () {
-            cartBloc.clear();
-          },
+        Consumer<CartController>(
+          builder: (context, cart, child) => IconButton(
+            icon: Badge(
+              badgeColor: Colors.orange,
+              toAnimate: false,
+              badgeContent: Text(
+                '${cart.items.length}',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                ),
+              ),
+              child: Icon(
+                Icons.delete_forever,
+                color: Colors.white,
+              ),
+            ),
+            onPressed: () {
+              cartController.clear();
+            },
+          ),
         ),
       ],
     );
