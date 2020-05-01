@@ -42,9 +42,7 @@ cart.contains(item.id)
 
 ## Todo
 - Http implement
-
 ---
-
 # Screen Shots
 
 <table>
