@@ -1,9 +1,9 @@
 <a href="https://github.com/flutter-samples/flutter-design-pattern"><img src="https://raw.githubusercontent.com/flutter-samples/flutter-design-pattern/master/github-assets/logo.png" alt="Flutter Samples" /></a>
 
-The project is maintained by a non-profit organisation, along with an amazing collections of Flutter samples. We're trying to make continuous commits for changes along with the Flutter tech progress.
+The project is maintained by a non-profit organization, along with an amazing collections of Flutter samples. We're trying to make continuous commits for changes along with the Flutter tech progress.
 
 
-# The Desigin Pattern 
+# The Design Pattern 
 
 <img src="https://raw.githubusercontent.com/flutter-samples/flutter-design-pattern/master/github-assets/flutter-design-pattern.png" alt="Design Pattern" />
 
